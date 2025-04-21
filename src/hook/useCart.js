@@ -8,19 +8,23 @@ export const useCart = () => {
   }, []);
 
   useEffect(() => {
-    if (cartItems !== undefined)
+    if (cartItems !== undefined){
       localStorage.setItem("SinaCodding_cart", JSON.stringify(cartItems));
+    } 
   }, [cartItems]);
   const addToCart = (itemId) => {
-    if (!cartItems?.find((item) => item.id === itemId))
-      setCartItems([...cartItems, { id: itemId, count: 1 }]);
+    if (!cartItems?.find((item) => item.id === itemId)){
+      const updated = [...cartItems, { id: itemId, count: 1 }];
+      setCartItems(updated);
+    
+  }
     else
-      setCartItems(
-        cartItems.map((item) => {
-          if (item.id === itemId) return { ...item, count: item.count + 1 };
-          else return item;
-        })
-      );
+      {
+        const updated = cartItems.map((item) =>
+          item.id === itemId ? { ...item, count: item.count + 1 } : item
+        );
+        setCartItems(updated);
+      }
   };
   const removeFromCart = (itemId) => {
     setCartItems(
@@ -32,9 +36,9 @@ export const useCart = () => {
     );
   };
   const resetCart = () => {
-    setCartItems();
+    setCartItems([]);
     localStorage.removeItem("SinaCodding_cart");
-    localStorage.clear();
+    
   };
 
   return { cartItems, addToCart, removeFromCart, resetCart };

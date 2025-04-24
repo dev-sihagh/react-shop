@@ -8,6 +8,7 @@ import Nav from "./components/nav";
 import Welcome from "./components/welcome";
 import AddProduct from "./pages/add/add-product";
 import { ShopContextProvider } from "./context/shopContext";
+import Login from "./pages/login";
 function App() {
   return (
     <div className="App">
@@ -16,7 +17,8 @@ function App() {
           <Nav />
           <Welcome/>
           <Routes>
-            <Route path="/" element={<Shop />} />
+            <Route path="/" element={<Login />} />
+            <Route path="/shop" element={<Shop />} />
             <Route path="/cart" element={<Cart />} />
             <Route path="/about" element={<About />} />
             <Route path="/add-product" element={<AddProduct />} />
